@@ -1,4 +1,4 @@
-﻿
+﻿using QuizProjectEF.Helper;
 using QuizProject.Models;
 using QuizProject.Services;
 using QuizProject.Services.Interface;
@@ -80,6 +80,8 @@ while (isRunning)
                     Console.ResetColor();
                 }
             } while (!regex.IsMatch(password));
+            string hashedPassword = HashPassword.HashPasswordd(password);
+
 
             DateTime dateofbirth;
             while (true)
@@ -96,7 +98,7 @@ while (isRunning)
             }
 
 
-            user = userService.Register(username, password, dateofbirth);
+            user = userService.Register(username, hashedPassword, dateofbirth);
         }
         else if (option == "2")
         {
@@ -104,9 +106,10 @@ while (isRunning)
             var username = Console.ReadLine();
             Console.Write("Şifrə: ");
             var password = ReadPasswordWithStarsss.ReadPasswordWithStars();
+            var hashedPassword = HashPassword.HashPasswordd(password);
 
             Console.Clear();
-            user = userService.Login(username, password);
+            user = userService.Login(username, hashedPassword);
             Console.ForegroundColor = ConsoleColor.Red;
             if (user == null) Console.WriteLine("Yanlış giriş.");
             Console.ResetColor();
