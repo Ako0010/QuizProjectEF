@@ -147,7 +147,7 @@ public class QuizPlayerService : IQuizPlayerService
             Console.WriteLine($"\nSual {questionIndex + 1}: {q.Text}");
 
             for (int i = 0; i < variants.Count; i++)
-                Console.WriteLine($"   {i + 1}) {variants[i].Text}");
+                Console.WriteLine($"   {(char) ('A' + i)}) {variants[i].Text}");
 
             Console.Write("Cavabların nömrəsini ver vergüllə ayır: ");
             var input = Console.ReadLine();
@@ -155,7 +155,7 @@ public class QuizPlayerService : IQuizPlayerService
             var selectedIndexes = input == null ? new List<int>() :
                 input.Split(',')
                      .Where(s => !string.IsNullOrEmpty(s))
-                     .Select(s => int.TryParse(s.Trim(), out int idx) ? idx - 1 : -1)
+                     .Select(s => char.ToUpper(s.Trim()[0]) - 'A')
                      .Where(idx => idx >= 0 && idx < variants.Count)
                      .ToList();
 

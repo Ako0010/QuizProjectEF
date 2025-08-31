@@ -86,6 +86,14 @@ static class EditQuizz
 
         Console.Write("Sual mətni: ");
         var text = Console.ReadLine();
+
+        if (text.Length < 6)
+        {
+            Console.WriteLine("Sual mətni ən azı 6 simvol uzunluğunda olmalıdır!");
+            Console.ReadLine();
+            return;
+        }
+
         if (string.IsNullOrEmpty(text))
         {
             Console.WriteLine("Sual mətni boş ola bilməz!");
@@ -106,6 +114,13 @@ static class EditQuizz
         {
             Console.Write("Variant: ");
             var variant = Console.ReadLine();
+
+            if (variant.Length < 6)
+            {
+                Console.WriteLine("Variant ən azı 6 simvol uzunluğunda olmalıdır!");
+                continue;
+            }
+
             if (string.IsNullOrEmpty(variant)) break;
             question.Answers.Add(new Answer { Text = variant, IsCorrect = false });
         }
@@ -170,6 +185,14 @@ static class EditQuizz
         Console.WriteLine($"Cari sual mətni: {question.Text}");
         Console.Write("Yeni sual mətni (dəyişdirmək istəmirsinizsə boş buraxın): ");
         var newText = Console.ReadLine();
+
+        if (newText.Length < 6 && !string.IsNullOrEmpty(newText))
+        {
+            Console.WriteLine("Sual mətni ən azı 6 simvol uzunluğunda olmalıdır!");
+            Console.ReadLine();
+            return;
+        }
+
         if (!string.IsNullOrEmpty(newText))
             question.Text = newText;
 
@@ -186,6 +209,13 @@ static class EditQuizz
         {
             Console.Write("Variant: ");
             var variant = Console.ReadLine();
+
+            if (variant.Length < 6)
+            {
+                Console.WriteLine("Variant ən azı 6 simvol uzunluğunda olmalıdır!");
+                continue;
+            }
+
             if (string.IsNullOrEmpty(variant)) break;
             newAnswers.Add(new Answer { Text = variant, IsCorrect = false, QuestionId = question.QuizId });
         }

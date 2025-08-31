@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using QuizProject.Models;
+using QuizProjectEF.Helper;
 
 namespace QuizProjectEF.DBEntity;
 
@@ -13,6 +14,14 @@ public class QuizDBContext : DbContext
     public DbSet<Question> Questions { get; set; }
     public DbSet<UserScore> UserScores { get; set; }
 
+    public void EnsureSeedData()
+    {
+        if (!Quizzes.Any())
+        {
+            var dataAdder = new DataAdder(this);
+            dataAdder.SeedDataAdding();
+        }
+    }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Quizz;Integrated Security=True;Trust Server Certificate=True;");

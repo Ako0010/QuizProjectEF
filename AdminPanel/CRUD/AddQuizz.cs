@@ -16,7 +16,13 @@ namespace AdminPanel.CRUD;
         {
             Console.Write("Kateqoriya daxil edin: ");
             category = Console.ReadLine()?.Trim();
-        } while (string.IsNullOrEmpty(category));
+
+            if (string.IsNullOrEmpty(category) || category.Length < 6)
+            {
+                Console.WriteLine("Kateqoriya ən azı 6 simvol uzunluğunda olmalıdır.");
+            }
+
+        } while (string.IsNullOrEmpty(category) || category.Length < 6);
 
         var newQuiz = new Quiz
         {
@@ -60,6 +66,13 @@ namespace AdminPanel.CRUD;
         Console.Write("Sual mətni: ");
         var text = Console.ReadLine()?.Trim();
 
+        if (text.Length < 6)
+        {
+            Console.WriteLine("Sual mətni ən azı 6 simvol uzunluğunda olmalıdır.");
+            return null;
+        }
+
+
         if (string.IsNullOrEmpty(text))
         {
             Console.WriteLine("Sual mətni boş ola bilməz.");
@@ -77,6 +90,13 @@ namespace AdminPanel.CRUD;
         {
             Console.Write($"Variant #{varIndex} (boş burax bitirmək üçün): ");
             var variantText = Console.ReadLine()?.Trim();
+
+            if (variantText.Length < 6)
+            {
+                Console.WriteLine("Variant mətni ən azı 6 simvol uzunluğunda olmalıdır.");
+                continue;
+            }
+
             if (string.IsNullOrWhiteSpace(variantText))
             {
                 if (question.Answers.Count >= 3) break;

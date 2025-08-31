@@ -24,7 +24,7 @@ static class ShowQuizzess
                     Console.WriteLine($"  Sual #{question.QuestionId}: {question.Text}");
                     foreach (var answer in question.Answers)
                     {
-                        Console.WriteLine($"    Cavab: {answer.Text}");
+                        Console.WriteLine($"    Variant: {answer.Text} Cavabi: {answer.IsCorrect}");
                     }
                 }
             }
